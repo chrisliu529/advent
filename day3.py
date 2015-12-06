@@ -23,28 +23,34 @@ def calc(s):
     y = 0
     visited = {}
     santa = Location(0, 0)
+    robot = Location(0, 0)
     visited[santa.key()] = True
+    cnt = 0
     for c in s:
+        obj = santa
+        if cnt % 2 == 1:
+            obj = robot
         if c == '^':
-            santa.up()
+            obj.up()
         elif c == '<':
-            santa.left()
+            obj.left()
         elif c == '>':
-            santa.right()
+            obj.right()
         elif c == 'v':
-            santa.down()
+            obj.down()
         else:
             assert(False)
-        visited[santa.key()] = True
+        visited[obj.key()] = True
+        cnt += 1
     houses = visited.keys()
     return len(visited.keys())
 
 def main():
     f = file('input3')
     s = f.read()
-    assert calc('>') == 2
-    assert calc('^>v<') == 4
-    assert calc('^v^v^v^v^v') == 2
+    assert calc('^v') == 3
+    assert calc('^>v<') == 3
+    assert calc('^v^v^v^v^v') == 11
 
     print calc(s)
     
