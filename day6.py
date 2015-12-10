@@ -30,20 +30,19 @@ def parse_command(line):
 def turn_on(start, end, lights):
     for x in range(start[0], end[0]+1):
         for y in range(start[1], end[1]+1):
-            lights[x][y] = 1
+            lights[x][y] += 1
 
 def turn_off(start, end, lights):
     for x in range(start[0], end[0]+1):
         for y in range(start[1], end[1]+1):
-            lights[x][y] = 0
+            lights[x][y] -= 1
+            if (lights[x][y] < 0):
+                lights[x][y] = 0
 
 def toggle(start, end, lights):
     for x in range(start[0], end[0]+1):
         for y in range(start[1], end[1]+1):
-            if lights[x][y] == 0:
-                lights[x][y] = 1
-            else:
-                lights[x][y] = 0
+            lights[x][y] += 2
 
 def apply_command(cmd, lights):
     if cmd.action == 'on':
