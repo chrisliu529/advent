@@ -73,6 +73,10 @@ def main():
             continue
         gate = parse_gate(line)
         gates[gate.out] = gate
+    new_b = calc(gates, 'a')
+    global visited
+    visited = {}
+    gates['b'] = Gate('', [new_b], 'b')
     print calc(gates, 'a')
 
 main()
