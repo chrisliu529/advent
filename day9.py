@@ -52,6 +52,23 @@ class SantaMap(object):
         print min_path
         return min_path_v
 
+    def longest_path(self):
+        visited = []
+        for k in self.edges.keys():
+            visited.append(k)
+            self.check_path(k, 0, visited)
+            visited = []
+
+        max_path_v = 0
+        max_path = ''
+        for k in self.result:
+            path_v = self.result[k]
+            if path_v > max_path_v:
+                max_path_v = path_v
+                max_path = k
+        print max_path
+        return max_path_v
+    
 class Edge(object):
     def __init__(self, start, end, weight):
         self.start = start
@@ -72,6 +89,6 @@ def main():
         print line
         edge = parse_edge(line)
         santa_map.insert_edge(edge)
-    print santa_map.shortest_path()
+    print santa_map.longest_path()
 
 main()
