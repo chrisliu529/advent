@@ -23,6 +23,6 @@ def trans(s, n):
     return s
 
 def main():
-    print len(trans('3113322113', 40))
+    print len(trans('3113322113', 50))
 
 main()
