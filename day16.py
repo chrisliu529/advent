@@ -20,7 +20,15 @@ def parse_sues(path):
 
 def matched(aunt, pat):
     for k in aunt.keys():
-        if k != 'id' and aunt[k] != pat[k]:
+        if k == 'id':
+            continue
+        if k == 'cats' or k == 'trees':
+            if aunt[k] <= pat[k]:
+                return False
+        elif k == 'pomeranians' or k == 'goldfish':
+            if aunt[k] >= pat[k]:
+                return False
+        elif aunt[k] != pat[k]:
             return False
     return True
 
