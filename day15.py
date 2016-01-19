@@ -42,11 +42,20 @@ def menu_score(menu):
         return 0
     return s_cap*s_dur*s_fla*s_text
 
+def cal_score(menu):
+    s = 0
+    for (ing, i) in menu:
+        s += ing.calories * i
+    return s
+
 def try_recipe(ingredients, menu, amount, bs):
     best_menu = []
     remained = [ing for ing in ingredients if not menu_include(menu, ing.name)]
     if len(remained) == 1:
         menu.append((remained[0], amount))
+        if cal_score(menu) != 500:
+            menu.pop()
+            return 0
         s = menu_score(menu)
         if s > bs:
             best_menu = list(menu)
@@ -69,7 +78,7 @@ def best_score(path):
     return try_recipe(ingredients, [], 100, 0)
 
 def main():
-    assert 62842880 == best_score('input15a')
+    assert 57600000 == best_score('input15a')
     print best_score('input15')
     
 main()
